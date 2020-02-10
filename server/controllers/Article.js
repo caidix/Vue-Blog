@@ -47,8 +47,8 @@ const findOne = async (req, res, next) => {
   const queryOptions = {
     populate: 'category'
   }
-  await ArticleModel.findById(params.id).setOptions(queryOptions).then(res => {
-    returnClient(res, 200, 0, '获取成功!', data = res)
+  await ArticleModel.findById(params.id).setOptions(queryOptions).then(data => {
+    returnClient(res, 200, 0, '获取成功!', data)
   }).catch(err => {
     returnClient(res, 200, -1, err)
   })
