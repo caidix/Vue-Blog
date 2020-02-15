@@ -9,7 +9,8 @@ export interface ResponseData {
 let https: AxiosInstance | any;
 
 https = axios.create({
-  baseURL: 'http://localhost:3000/api/blog' || '/api/blog',
+  baseURL: process.env.VUE_BLOG_API_URL || '/api/blog',
+  // baseURL: 'http://localhost:3000/api/blog',
   timeout: 5000,
   withCredentials: true,
   headers: { 'Access-Control-Allow-Origin': '*' }

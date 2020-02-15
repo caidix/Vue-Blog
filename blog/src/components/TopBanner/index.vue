@@ -1,8 +1,8 @@
 <template>
   <div style="margin-bottom:10px;border-bottom: 1px solid #dcdfe6;">
     <div class="article-ban">
-      <img v-if="srcBan ==='list'" src="@/assets/articlelist.png" alt />
-      <img v-if="srcBan === 'home'" src="@/assets/CD-Blog.png" alt />
+      <img v-if="srcBan ==='list'" src="https://cd-blog.oss-cn-shenzhen.aliyuncs.com/blog/articlelist.png" alt />
+      <img v-if="srcBan === 'home'" src="https://cd-blog.oss-cn-shenzhen.aliyuncs.com/blog/blog.png" alt />
     </div>
   </div>
 </template>

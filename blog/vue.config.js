@@ -4,8 +4,8 @@ function resolve(dir) {
 }
 const sourceMap = process.env.NODE_ENV === "development";
 module.exports = {
-  publicPath: './',
-  outputDir: 'dist',
+  publicPath: '/',
+  outputDir: '../server/blog',
   lintOnSave: false,
   productionSourceMap: sourceMap,
   devServer: {
@@ -17,7 +17,7 @@ module.exports = {
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:7000/api',
+        target: 'http://localhost:3000/api',
         changeOrigin: true
       }
     }

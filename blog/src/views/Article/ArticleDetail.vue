@@ -44,6 +44,7 @@
 import Author from "@/components/Author/index.vue";
 import markdown from "@/utils/markdown.js";
 import { Vue, Component, Prop } from "vue-property-decorator";
+import "highlight.js/styles/monokai-sublime.css";
 
 @Component({
   components: { Author }
@@ -98,9 +99,41 @@ export default class ArticleDetail extends Vue {
 
 .detailed-content {
   padding: 1.3rem;
-  font-size: 1rem;
+  font-size: 1.05rem;
+  color: #777;
+  line-height: 1.9rem;
   img {
     margin: 0 auto !important;
+  }
+  h1 {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #d9dada;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    -webkit-margin-bottom-collapse: 2rem;
+    color: #333;
+    font-size: 1.8  rem;
+    font-weight: bold;
+  }
+  h2 {
+    border-bottom: 1px solid #d9dada;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    -webkit-margin-bottom-collapse: 2rem;
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  h3 {
+    border-left: 4px solid rgb(156, 203, 250);
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    -webkit-margin-bottom-collapse: 2rem;
+    color: #666;
+    font-size: 1.3rem;
+    font-weight: bold;
   }
 }
 .detail-introduction {
@@ -112,11 +145,73 @@ export default class ArticleDetail extends Vue {
 }
 .toc-list {
   margin: 0 10px;
-  li a {
-    color: rgba(17, 6, 6, 0.952);
-    &:hover {
-      color: rgb(41, 17, 253);
+  li {
+    list-style: none;
+    a {
+      color: rgba(17, 6, 6, 0.952);
+      &:hover {
+        color: rgb(41, 17, 253);
+      }
     }
   }
+}
+pre {
+  display: block;
+  background-color: #283646 !important;
+  padding: 0.5rem !important;
+  overflow-y: auto;
+  font-weight: 300;
+  font-family: Menlo, monospace;
+  border-radius: 0.3rem;
+}
+
+pre > code {
+  border: 0px !important;
+  background-color: #283646 !important;
+  color: #ccc !important;
+}
+code {
+  display: inline-block;
+  background-color: #fff5f5;
+  border-radius: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #ff502c;
+  margin: 0px 3px;
+  line-height: 1.1rem;
+}
+table {
+  margin: 0 auto;
+}
+table th {
+  font-weight: bold;
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+blockquote {
+  border-left: 4px solid #ddd;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote > :first-child {
+  margin-top: 0px;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="author">
     <div class="avatar-box">
-      <img class="avatar circle" src="@/assets/avatar.jpg" alt />
+      <img class="avatar circle" src="https://cd-blog.oss-cn-shenzhen.aliyuncs.com/blog/avatar.jpg" alt />
     </div>
     <div class="author-introduction">
       <cd-line>CD</cd-line>一枚在前端路上爬行的搬砖青年

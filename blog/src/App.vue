@@ -48,22 +48,10 @@ body {
   line-height: 1.6;
   padding: 0;
   background: #03a9f4;
-  background: url(./assets/bg.png) 100% 100%;
+  background: url(https://cd-blog.oss-cn-shenzhen.aliyuncs.com/blog/bg.png) 100% 100%;
   background-size: 100% 100%;
 }
-h1,
-h2,
-h3,
-h4 {
-  margin: 10px 10px;
-  padding: 0;
-}
-ul,
-li {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+
 .slide-enter {
   transform: translate(-50%, 0);
 }
