@@ -21,7 +21,7 @@
         </router-link>
         <router-link class="navtab-item" active-class="active" to="/list" tag="li">
           <svg-icon icon-class="list" size="24"></svg-icon>
-          <span>列表</span>
+          <span>归档</span>
         </router-link>
         <router-link class="navtab-item" active-class="active" to="/about" tag="li">
           <svg-icon icon-class="about-me" size="24"></svg-icon>

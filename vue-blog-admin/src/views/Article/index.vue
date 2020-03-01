@@ -1,6 +1,22 @@
 <template>
   <div class="article-container">
     <h1>文章列表</h1>
+    <el-row type="flex" class="search-input">
+      <el-col :span="3">文章搜索：</el-col>
+      <el-col  :span="16">
+        <el-autocomplete
+          class="inline-input"
+          v-model="searchValue"
+          :fetch-suggestions="querySearch"
+          placeholder="请输入标题"
+          :trigger-on-focus="false"
+          @select="handleSelect"
+          :debounce="500"
+          prefix-icon="el-icon-search"
+          :clearable="true"
+        ></el-autocomplete>
+      </el-col>
+    </el-row>
     <el-table
       :data="item.slice((currentPage-1)*pagesize,currentPage*pagesize)"
       v-loading="listLoading"
@@ -81,6 +97,8 @@ export default {
       pagesize: 10,
       total: 0,
       listLoading: false,
+      searchValue: "",
+      limitSearch: 0,
       listQuery: {
         page: 1,
         limit: 10,
@@ -98,17 +116,27 @@ export default {
     handleCurrentChange: function(currentPage) {
       this.currentPage = currentPage;
     },
+    async querySearch(queryString, cb) {
+      let { data } = await api.fuzzySearch({ title: queryString });
+      if (data.code === 0) {
+        let res = data.data.reduce((prev, next) => {
+          prev.push({
+            value: next.title,
+            _id: next._id
+          });
+          return prev;
+        }, []);
+        cb(res);
+      } else {
+        cb([]);
+      }
+    },
+    handleSelect(value) {
+      this.editArticle(value);
+    },
     async getList() {
       this.listLoading = true;
-      let params = {
-        getContent: false
-      };
-      if (this.$route.query)
-        params["userId"] = this.$route.query.userId
-          ? this.$route.query.userId
-          : "";
-
-      let { data } = await api.getArticle(params);
+      let { data } = await api.getArticle();
       if (data.code === 0) {
         this.item = data.data;
         this.total = data.data.length;
@@ -120,8 +148,8 @@ export default {
       }
       this.listLoading = false;
     },
-    editArticle(row){
-      this.$router.push(`/article/edit/${row._id}`)
+    editArticle(row) {
+      this.$router.push(`/article/edit/${row._id}`);
     },
     handleDel(row) {
       this.$confirm(`此操作将永久删除文章：${row.title}, 是否继续?`, "提示", {
@@ -163,6 +191,13 @@ export default {
     margin-right: 0;
     margin-bottom: 0;
     width: 50%;
+  }
+  .search-input{
+    align-items: center;
+    margin-bottom: 20px;
+    .inline-input{
+      min-width: 450px;
+    }
   }
 }
 </style>

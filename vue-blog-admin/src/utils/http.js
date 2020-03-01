@@ -5,6 +5,7 @@ import Vue from 'vue';
 
 const http = axios.create({
   baseURL: process.env.VUE_ADMIN_API_URL|| '/api',
+  // baseURL: 'http://localhost:3000/api',
   timeout: 5000,
   withCredentials: true,
   header:{ 'Access-Control-Allow-Origin':'*' }

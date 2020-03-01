@@ -39,7 +39,6 @@ export default {
     },
     change(value, render) {
       // render 为 markdown 解析后的结果[html]
-      console.log(value, render)
       this.html = render;
     },
     async upadateImg(pos, $file) {
@@ -52,8 +51,6 @@ export default {
     },
     // 提交
     submit() {
-      console.log(this.content);
-      console.log(this.html);
       this.$emit("submit-article", {
         content: this.content,
         html: this.html

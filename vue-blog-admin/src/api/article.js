@@ -47,11 +47,20 @@ const uploadImg = (data) => {
   })
 }
 
+const fuzzySearch = (params) => {
+  return http.request({
+    method: 'get',
+    url: '/admin/article/fuzzySearch',
+    params
+  })
+}
+
 export default {
   getArticle,
   delArticle,
   editArticle,
   findOneArticle,
   addArticle,
-  uploadImg
+  uploadImg,
+  fuzzySearch
 }
