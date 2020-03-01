@@ -22,7 +22,7 @@ module.exports = app => {
   let adminCategory = require('../../controllers/Category');
   let adminTag = require('../../controllers/Tag');
 
-  app.use('/api/admin', authMiddleware(), router);
+  app.use('/api/admin',  router);
 
   // 文章路由
   router.post('/article/add', adminArticle.add);
