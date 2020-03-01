@@ -1,17 +1,17 @@
-const CategoryModel = require('../models/Category');
+const GatherModel = require('../models/Gather');
 const { splitParams, returnClient } = require('../utils/utils')
 const moment = require('moment')
 const add = async (req, res, next) => {
   let GET = splitParams(req.url);
   if (GET.name) {
-    await CategoryModel.find({ name: GET.name }).then(async data => {
+    await GatherModel.find({ name: GET.name }).then(async data => {
       if (data.length > 0) {
         returnClient(res, 200, -1, '已有该分类,请重新设定。', data)
       } else {
-        await CategoryModel.create({
+        await GatherModel.create({
           name: GET.name,
           desc: GET.desc ? GET.desc : '',
-          parent: GET.parent || '',
+          img: GET.img,
           update_time: moment().format('YYYY-MM-DD HH:mm:ss')
         }).then(data => {
           returnClient(res, 200, 0, '添加成功!')
@@ -26,7 +26,7 @@ const add = async (req, res, next) => {
 }
 
 const list = async (req, res, next) => {
-  await CategoryModel.find().populate('parent').limit().then((data) => {
+  await GatherModel.find().limit().then((data) => {
     returnClient(res, 200, 0, '获取成功', data)
   }).catch((err) => {
     returnClient(res, 200, -1, err)
@@ -34,9 +34,9 @@ const list = async (req, res, next) => {
 }
 
 const edit = async (req, res, next) => {
-  const { id, name, desc } = req.body;
-  await CategoryModel.update({ id }, {
-    "$set": { name, desc, update_time: moment().format('YYYY-MM-DD h:mm:ss') }
+  const { id, name, desc, img } = req.body;
+  await GatherModel.update({ id }, {
+    "$set": { name, desc, img, update_time: moment().format('YYYY-MM-DD h:mm:ss') }
   }).then((data) => {
     returnClient(res, 200, 0, '修改成功!', data)
   }).catch((err) => {
@@ -47,7 +47,7 @@ const edit = async (req, res, next) => {
 const del = async (req, res, next) => {
   let GET = splitParams(req.url);
   if (GET.id) {
-    await CategoryModel.findOneAndRemove({ id: GET.id }).then(({ name, update_time }) => {
+    await GatherModel.findOneAndRemove({ id: GET.id }).then(({ name, update_time }) => {
       returnClient(res, 200, 0, '删除成功!', data = { name, update_time })
     }).catch((err) => {
       returnClient(res, 200, -1, err)

@@ -77,9 +77,17 @@ export default {
       this.$emit("dialog-close");
     },
     save() {
+      if (this.model.name === "") {
+        Message({
+          message: "名字不能为空！",
+          type: "error"
+        });
+        return;
+      }
       this.item.id ? this.editTag() : this.addTag();
     },
     async addTag() {
+      
       let { data } = await api.addTag({
         ...this.model
       });
@@ -102,7 +110,6 @@ export default {
         ...this.model,
         id: this.item.id
       };
-      console.log(params);
       let { data } = await api.editTag(params);
       if (data.code === 0) {
         Message({

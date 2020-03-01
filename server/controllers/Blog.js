@@ -15,6 +15,7 @@ const articleList = async (req, res, next) => {
       .skip(Number((page - 1) * limit))
       .limit(Number(limit))
       .populate('category')
+      .sort({ id : -1 })
       .then(data => {
         let response = {
           data,

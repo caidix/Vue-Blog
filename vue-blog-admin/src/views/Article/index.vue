@@ -109,7 +109,6 @@ export default {
           : "";
 
       let { data } = await api.getArticle(params);
-      console.log(data);
       if (data.code === 0) {
         this.item = data.data;
         this.total = data.data.length;
