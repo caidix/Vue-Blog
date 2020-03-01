@@ -4,7 +4,7 @@ const moment = require('moment');
 const schema = mongoose.Schema({
   title: { type: String, required: true, validate: /\S+/ },  //文章标题
 
-  articleContent: { type: Object, require: true}, //文章内容
+  articleContent: { type: Object, require: true }, //文章内容
 
   author: { type: String, required: true, validate: /\S+/ }, // 作者
 
@@ -13,14 +13,15 @@ const schema = mongoose.Schema({
 
   // 文章关键字（SEO）
   keyword: { type: String, default: '' },
-  
+
   tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'tag', required: true }],
   /* 文章分类 0 文章分享 2 视频教程 */
   category: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'category', required: true
   }],
-
+  // 归档文章集合
+  gather: { type: mongoose.Schema.Types.ObjectId, ref: 'gather' },
   img_url: { // 封面图
     type: String,
     default: ''

@@ -64,7 +64,7 @@ export default {
       handler: function(val) {
         let { query } = val;
         if (query) {
-          this.beforePath = query.redirect ? query.redirect : "/";
+          this.beforePath = query.redirect ? query.redirect : "/index";
         }
       },
       immediate: true
@@ -171,7 +171,7 @@ $light_gray: #eee;
   height: 100%;
   display: flex;
   justify-content: center;
-  background: url("../../assets/img/blue.png");
+  background: url("https://cd-blog.oss-cn-shenzhen.aliyuncs.com/admin/blue.png");
   background-size: 100% 100%;
   margin: 0px auto;
   background-repeat: no-repeat;

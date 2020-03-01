@@ -33,14 +33,6 @@ export default {
   components: {
     sidebarItem
   },
-  mounted() {
-    console.log();
-  },
-  watch: {
-    $route: function(val) {
-      console.log(val);
-    }
-  },
   computed: {
     ...mapGetters(["sidebar"]),
     activeIndex() {

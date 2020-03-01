@@ -100,7 +100,7 @@ export default class ArticleDetail extends Vue {
 .detailed-content {
   padding: 1.3rem;
   font-size: 1.05rem;
-  color: #777;
+  color: #000;
   line-height: 1.9rem;
   img {
     margin: 0 auto !important;
@@ -112,7 +112,7 @@ export default class ArticleDetail extends Vue {
     margin-top: 2rem;
     -webkit-margin-bottom-collapse: 2rem;
     color: #333;
-    font-size: 1.8  rem;
+    font-size: 1.8 rem;
     font-weight: bold;
   }
   h2 {
@@ -135,6 +135,9 @@ export default class ArticleDetail extends Vue {
     font-size: 1.3rem;
     font-weight: bold;
   }
+  h4{
+    font-size: 1.2rem;
+  }
 }
 .detail-introduction {
   border: 3px solid #f6f6f6;
@@ -145,8 +148,27 @@ export default class ArticleDetail extends Vue {
 }
 .toc-list {
   margin: 0 10px;
+  .anchor-ul {
+    margin-left: 10px;
+    position: relative;
+    box-shadow: 0 0px 0px #fff;
+    list-style: disc;
+    padding-bottom: 5px;
+    ul {
+      list-style: decimal;
+      ul {
+        list-style: circle;
+        ul {
+          list-style: square;
+        }
+      }
+    }
+  }
   li {
-    list-style: none;
+    &:hover {
+      color: rgb(41, 17, 253);
+    }
+    // list-style: none;
     a {
       color: rgba(17, 6, 6, 0.952);
       &:hover {
@@ -154,6 +176,12 @@ export default class ArticleDetail extends Vue {
       }
     }
   }
+}
+ol > ul {
+  margin-left: 50px;
+}
+ul {
+  margin-left: 40px;
 }
 pre {
   display: block;
@@ -205,6 +233,7 @@ blockquote {
   border-left: 4px solid #ddd;
   padding: 0 15px;
   color: #777;
+  margin-left: 20px;
 }
 
 blockquote > :first-child {
@@ -213,5 +242,8 @@ blockquote > :first-child {
 
 blockquote > :last-child {
   margin-bottom: 0px;
+}
+.hljs-comment {
+  color: #ff6a6a;
 }
 </style>

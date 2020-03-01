@@ -23,7 +23,6 @@ const add = async (req, res, next) => {
 }
 const list = async (req, res, next) => {
   let GET = splitParams(req.url);
-  let params = GET.getContent ? {} : { articleContent: false };
   // if (!GET['userId'] && res.session.id) {
   //   GET['userId'] = res.session.id;
   // }
@@ -31,11 +30,9 @@ const list = async (req, res, next) => {
     populate: ['category']
   }
 
-  // let findconf = GET['userId'] ? { sssociatedAccount: GET['userId'] } : {}
-  // if (GET._id) {
-  //   findconf.tags = { $in: info._id }
-  // }
-  await ArticleModel.find({}, params)
+  await ArticleModel.find({}, {
+    articleContent: 0
+  })
     .setOptions(queryOptions).limit().skip(0).then(data => {
       returnClient(res, 200, 0, '获取文章列表成功!', data)
     }).catch(err => {
@@ -63,6 +60,21 @@ const delOne = async (req, res, next) => {
   })
 }
 
+const fuzzySearch = async (req, res, next) => {
+  let params = splitParams(req.url);
+  const queryOptions = {
+    populate: 'category'
+  }
+  let reg = new RegExp(params.title, "i");
+  await ArticleModel.find({
+    title: { $regex: reg }
+  }).setOptions(queryOptions).then(data => {
+    returnClient(res, 200, 0, '获取成功!', data)
+  }).catch(err => {
+    returnClient(res, 200, -1, err)
+  })
+}
+
 const editArticle = async (req, res, next) => {
   let data = req.body;
   await ArticleModel.findOneAndUpdate({ _id: data._id }, data).then((data) => {
@@ -78,5 +90,6 @@ module.exports = {
   findOne,
   delOne,
   editArticle,
-  alioss_update
+  alioss_update,
+  fuzzySearch
 }

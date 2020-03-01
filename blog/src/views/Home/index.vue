@@ -51,7 +51,6 @@
             </div>
           </li>
         </ul>
-        <Pagination :page-config="pageConfigTotal" @changeCurrentPage="changePage" />
       </div>
       <div style="text-align:center" v-else>暂无内容~~</div>
     </div>

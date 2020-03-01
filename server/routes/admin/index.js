@@ -21,8 +21,10 @@ module.exports = app => {
   let adminArticle = require('../../controllers/Article');
   let adminCategory = require('../../controllers/Category');
   let adminTag = require('../../controllers/Tag');
+  let adminGather = require('../../controllers/Gather');
 
   app.use('/api/admin',  router);
+  // app.use('/api/admin', authMiddleware(), router);
 
   // 文章路由
   router.post('/article/add', adminArticle.add);
@@ -30,6 +32,7 @@ module.exports = app => {
   router.post('/article/upload', upload.single('file'), adminArticle.alioss_update);
   router.get('/article/list', adminArticle.list);
   router.get('/article/findOne', adminArticle.findOne);
+  router.get('/article/fuzzySearch', adminArticle.fuzzySearch);
   router.delete('/article/delOne/:id', adminArticle.delOne);
 
   // 分类路由
@@ -43,6 +46,12 @@ module.exports = app => {
   router.get('/tag/list', adminTag.list)
   router.get('/tag/del', adminTag.del)
   router.post('/tag/edit', adminTag.edit)
+
+  // 归档路由
+  router.get('/gather/add', adminGather.add)
+  router.get('/gather/list', adminGather.list)
+  router.get('/gather/del', adminGather.del)
+  router.post('/gather/edit', adminGather.edit)
 
   // 错误反馈
   app.use(async (err, req, res, next) => {

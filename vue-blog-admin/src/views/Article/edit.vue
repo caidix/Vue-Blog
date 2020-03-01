@@ -99,11 +99,20 @@
                   </el-select>
                 </el-form-item>
               </el-col>
+              <el-col :span="8">
+                <el-form-item label-width="120px" prop="tags" label="归档">
+                  <el-select v-model="postForm.gather" placeholder="请选择归档分类">
+                    <template v-for="(item, index) in gatherList">
+                      <el-option :label="item.name" :value="item._id" :key="index"></el-option>
+                    </template>
+                  </el-select>
+                </el-form-item>
+              </el-col>
               <el-col　:span="16">
                  <el-form-item label-width="120px" prop="img_url" label="文章封面">
                   <el-upload
                       class="avatar-uploader"
-                      :action="'http://localhost:7000/api/admin/article/upload'"
+                      :action="'/api/admin/article/upload'"
                       :on-success="upload"
                     >
                       <img v-if="postForm.img_url" :src="postForm.img_url" class="avatar">
@@ -131,6 +140,7 @@ import Markdown from "@/components/Markdown";
 import api from "@/api/article";
 import cat from "@/api/category";
 import tag from "@/api/tag";
+import gat from "@/api/gather";
 export default {
   components: {
     MDinput,
@@ -174,7 +184,8 @@ export default {
         introduction: "",
         draft: 0,
         tags: 0,
-        img_url: ''
+        img_url: '',
+        gather: ''
       },
       loading: false,
       userListOptions: [],
@@ -186,17 +197,18 @@ export default {
       },
       content: "",
       categoryList: [],
-      tagList: []
+      tagList: [],
+      gatherList: []
     };
   },
   created() {
     this.getCategory();
     this.getTag();
+    this.getGather();
     this.id && this.fetch();
   },
   methods: {
     upload(data){
-      console.log(data);
       this.$set(this.postForm, 'img_url', data.data.url)
     },
     async fetch() {
@@ -229,6 +241,12 @@ export default {
       let { data } = await cat.getCategory();
       if (data.code === 0) {
         this.categoryList = data.data;
+      }
+    },
+    async getGather() {
+      let { data } = await gat.getGather();
+      if (data.code === 0) {
+        this.gatherList = data.data;
       }
     },
     async getTag() {
@@ -292,7 +310,8 @@ export default {
     }
   }
   .avatar{
-    max-height: 200px;
+    width: 100px;
+    height: 100px;
   }
 }
 </style>

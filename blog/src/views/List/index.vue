@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
-    <h1>暂无</h1>
+  <div class="about home-main">
+    <div class="main-left"></div>
   </div>
 </template>

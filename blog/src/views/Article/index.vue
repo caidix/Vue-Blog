@@ -92,7 +92,7 @@ export default class Home extends Vue {
   private articleList = [];
   private categoryList = [];
   private categoryActive = "";
-  private pageConfigTotal = { total: 0, pageSize: 5, pageNo: 1 };
+  private pageConfigTotal = { total: 0, pageSize: 10, pageNo: 1 };
 
   private async getArticle(): Promise<void> {
     const params = {

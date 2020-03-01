@@ -65,7 +65,6 @@ export default {
     async fetch() {
       this.listLoading = true;
       let { data } = await api.getUserList();
-      console.log(data);
       if (data.code === 0) {
         this.item = data.data;
         this.$message({

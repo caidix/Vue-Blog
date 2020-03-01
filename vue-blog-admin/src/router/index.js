@@ -47,6 +47,18 @@ const contentRoutes = [
     meta: { title: '标签管理', icon: 'el-icon-collection-tag', noCache: true }
   },
   {
+    path: '/gather',
+    redirect: '/Gather/index',
+    component: Layout,
+    children: [{
+      path: 'index',
+      component: resolve => require(['@/views/Gather/index.vue'], resolve),
+      name: 'gather',
+      meta: { title: '归档列表', icon: 'el-icon-s-finance', noCache: true }
+    }],
+    meta: { title: '文档集合管理', icon: 'el-icon-s-finance', noCache: true }
+  },
+  {
     path: '/article',
     redirect: '/article/list',
     component: Layout,

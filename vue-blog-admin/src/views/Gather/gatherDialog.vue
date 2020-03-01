@@ -8,21 +8,21 @@
     :destroy-on-close="true"
   >
     <el-form label-width="100px" @submit.native.prevent="save">
-      <el-form-item label="上级分类:">
-        <el-select v-model="model.parent">
-          <el-option
-            v-for="value in parents"
-            :key="value._id"
-            :label="value.name"
-            :value="value._id"
-          ></el-option>
-        </el-select>
-      </el-form-item>
       <el-form-item label="名称">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
       <el-form-item label="描述">
         <el-input v-model="model.desc"></el-input>
+      </el-form-item>
+      <el-form-item label-width="120px" prop="img_url" label="文章封面">
+        <el-upload
+          class="avatar-uploader"
+          :action="'http://localhost:3000/api/admin/article/upload'"
+          :on-success="upload"
+        >
+          <img v-if="model.img" :src="model.img" class="avatar" />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -34,7 +34,7 @@
 
 
 <script>
-import api from "@/api/tag.js";
+import api from "@/api/gather.js";
 import { Message } from "element-ui";
 export default {
   props: {
@@ -56,23 +56,26 @@ export default {
         this.model = {
           name: val.name,
           desc: val.desc,
-          parent: val.parent._id
+          img: val.img
         };
       } else {
         this.model = {
           name: "",
           desc: "",
-          parent: ""
+          img: ""
         };
       }
     }
   },
   data() {
     return {
-      model: {}
+      model: { name: "", desc: "", img: "" }
     };
   },
   methods: {
+    upload(data) {
+      this.$set(this.model, "img", data.data.url);
+    },
     handleClose() {
       this.$emit("dialog-close");
     },
@@ -87,8 +90,7 @@ export default {
       this.item.id ? this.editTag() : this.addTag();
     },
     async addTag() {
-      
-      let { data } = await api.addTag({
+      let { data } = await api.addGather({
         ...this.model
       });
       if (data.code === 0) {
@@ -110,7 +112,7 @@ export default {
         ...this.model,
         id: this.item.id
       };
-      let { data } = await api.editTag(params);
+      let { data } = await api.editGather(params);
       if (data.code === 0) {
         Message({
           message: data.message || "修改成功",
@@ -128,3 +130,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  .avatar{
+    width: 100%;
+  }
+</style>
