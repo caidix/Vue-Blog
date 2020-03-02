@@ -8,11 +8,12 @@ const add = async (req, res, next) => {
       if (data.length > 0) {
         returnClient(res, 200, -1, '已有该分类,请重新设定。', data)
       } else {
+        if (GET.parent === '') {
+            delete GET['parent'];
+        }
         await CategoryModel.create({
-          name: GET.name,
-          desc: GET.desc ? GET.desc : '',
-          parent: GET.parent || '',
-          update_time: moment().format('YYYY-MM-DD HH:mm:ss')
+          ...GET,
+          update_time: moment().format('YYYY-MM-DD h:mm:ss')
         }).then(data => {
           returnClient(res, 200, 0, '添加成功!')
         }).catch((err) => {
