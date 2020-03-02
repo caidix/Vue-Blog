@@ -72,7 +72,7 @@ export default class List extends Vue {
       url: "/gather/list"
     });
     if (data) {
-      this.gatherList = data.concat(data);
+      this.gatherList = data;
     }
   }
   private async getArticleByGather(elem: any): Promise<void> {
@@ -84,7 +84,7 @@ export default class List extends Vue {
       }
     });
     if (data) {
-      this.articleList = data.concat(data);
+      this.articleList = data;
       this.showDialog = true;
       this.gatherTitle = elem.name;
     }
