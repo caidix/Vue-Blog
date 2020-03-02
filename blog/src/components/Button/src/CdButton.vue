@@ -1,5 +1,9 @@
 <template>
+  <!-- 注意，这里要给button附上点击事件，否则引入的时候click事件是不会触发的
+    要让他被动触发。去替代button的点击事件
+  -->
   <button
+    @click="handleClick"
     :disabled="disabled"
     :class="['cd-btn',btnClass,
   {
@@ -23,10 +27,14 @@ export default class CdBotton extends Vue {
   @Prop({ default: "default" }) type!: String;
   @Prop({ default: "" }) icon!: String;
   @Prop({ default: false }) hasText!: Boolean;
+  @Prop({ default: false }) onlyIcon!: Boolean;
   @Prop({ default: false }) plain!: Boolean;
   @Prop({ default: false }) disabled!: Boolean;
   get btnClass(): String {
     return this.plain ? `btn-plain-${this.type}` : `btn-${this.type}`;
+  }
+  private handleClick(evt: any) {
+    this.$emit("click", evt);
   }
 }
 </script>
@@ -58,13 +66,15 @@ $colors: (
   "default": #00d1b2,
   "success": rgb(103, 194, 58),
   "alert": #ff8936,
-  "error": rgb(250, 42, 31)
+  "error": rgb(250, 42, 31),
+  "exit": #606266
 );
 $hoverColor: (
   "default": rgb(3, 192, 164),
   "success": rgb(133, 206, 97),
   "alert": rgb(235, 181, 99),
-  "error": rgb(250, 98, 90)
+  "error": rgb(250, 98, 90),
+  "exit": #ecf5ff
 );
 @each $colorKey, $color in $colors {
   .btn-#{$colorKey} {
@@ -76,12 +86,13 @@ $hoverColor: (
     border-color: map-get($map: $hoverColor, $key: $colorKey);
   }
   .btn-plain-#{$colorKey} {
-    background: rgb(236, 245, 255);
+    background: rgb(252, 252, 252);
     color: $color;
     border-color: $color;
   }
   .btn-plain-#{$colorKey}:hover {
-    color: #fff;
+    color: #409eff;
+    border-color: #409eff;
     background: map-get($map: $hoverColor, $key: $colorKey);
   }
 }

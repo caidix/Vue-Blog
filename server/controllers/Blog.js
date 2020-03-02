@@ -1,6 +1,7 @@
 const ArticleModel = require('../models/Article');
 const CategoryModel = require('../models/Category');
 const TagModel = require('../models/Tag');
+const GatherModel = require('../models/Gather');
 const { returnClient, splitParams } = require('../utils/utils')
 const articleList = async (req, res, next) => {
   let { _id, page, limit } = splitParams(req.url);
@@ -15,7 +16,7 @@ const articleList = async (req, res, next) => {
       .skip(Number((page - 1) * limit))
       .limit(Number(limit))
       .populate('category')
-      .sort({ id : -1 })
+      .sort({ id: -1 })
       .then(data => {
         let response = {
           data,
@@ -39,7 +40,7 @@ const findOne = async (req, res, next) => {
     returnClient(res, 200, -1, err)
   })
 }
-
+// 分类列表
 const categoryList = async (req, res, next) => {
   await CategoryModel.find({}, {}).populate('parent').limit().then((data) => {
     returnClient(res, 200, 0, '获取成功', data)
@@ -47,7 +48,43 @@ const categoryList = async (req, res, next) => {
     returnClient(res, 200, -1, err)
   })
 }
+// 归档列表
+const gatherList = async (req, res, next) => {
+  await GatherModel.find().populate('parent').limit().then((data) => {
+    returnClient(res, 200, 0, '获取成功', data)
+  }).catch((err) => {
+    returnClient(res, 200, -1, err)
+  })
+  // await GatherModel.aggregate([{
+  //   $lookup: {
+  //     from: 'articles',
+  //     localField: '_id',
+  //     foreignField: 'gather',
+  //     as: 'articleList',
+  //   }
+  // }]).then(data => {
+  //   returnClient(res, 200, 0, '获取成功', data)
+  // })
+}
 
+const getArticleByGather = async (req, res, next) => {
+  let data = req.body;
+  await ArticleModel.find({
+    gather: data.id,
+    draft: 0
+  }, {
+    id: 1,
+    title: 1,
+    addTime: 1
+
+  }).then((data) => {
+    returnClient(res, 200, 0, '获取成功', data)
+  }).catch((err) => {
+    returnClient(res, 200, -1, err)
+  })
+}
+
+// 标签列表
 const tagList = async (req, res, next) => {
   await TagModel.find({}, {}).populate('parent').limit().then((data) => {
     returnClient(res, 200, 0, '获取成功', data)
@@ -88,4 +125,6 @@ module.exports = {
   findOne,
   categoryList,
   tagList,
+  gatherList,
+  getArticleByGather
 }

@@ -11,7 +11,7 @@
 <script lang='ts'>
 import { Vue, Component, Watch, Prop } from "vue-property-decorator";
 @Component
-export default class Author extends Vue {
+export default class Loading extends Vue {
   @Prop({ default: false }) window!: Boolean;
   @Prop({ default: false }) show!: Boolean;
   get getStyle(): any {

@@ -4,14 +4,9 @@
       <img class="avatar circle" src="https://cd-blog.oss-cn-shenzhen.aliyuncs.com/blog/avatar.jpg" alt />
     </div>
     <div class="author-introduction">
-      <cd-line>CD</cd-line>一枚在前端路上爬行的搬砖青年
+      <cd-line>CD</cd-line>人生百转千回，难免失意迷茫
       <cd-line>社交账号</cd-line>
-      <!-- <a >
-        <Avatar size="{28}" icon="github" class="account" />
-      </a>
-      <Avatar title="380141132" size="{28}" icon="qq" class="account" />
-      <Avatar size="{28}" title="后端由MongoDB+Nodejs支持" icon="database" class="account" />-->
-      <div class="author-context">
+     <div class="author-context">
         <a href="https://github.com/caidix/" target="_blank">
           <svg-icon size="32" icon-class="github"></svg-icon>
         </a>

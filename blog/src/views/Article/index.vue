@@ -2,7 +2,7 @@
   <div class="home-main">
     <!-- <TopBanner /> -->
     <div class="main-left">
-      <div class="main-title">
+      <div class="main-title" v-setTitle="'文章列表'">
         <h2>文章列表</h2>
       </div>
       <TopBanner srcBan="list" />

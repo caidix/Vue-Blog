@@ -3,7 +3,10 @@
     <div class="main-left">
       <div class="hambuger"></div>
       <div>
-        <div class="detailed-title">{{articleDetail.title}}</div>
+        <div
+          class="detailed-title"
+          v-setTitle="articleDetail.title"
+        >{{articleDetail.title}}</div>
 
         <div class="list-icon center">
           <span class="item">作者：{{articleDetail.author}}</span>
@@ -105,6 +108,13 @@ export default class ArticleDetail extends Vue {
   img {
     margin: 0 auto !important;
   }
+
+  ol > ul {
+    margin-left: 50px;
+  }
+  ul {
+    margin-left: 40px;
+  }
   h1 {
     padding-bottom: 1rem;
     border-bottom: 1px solid #d9dada;
@@ -135,7 +145,7 @@ export default class ArticleDetail extends Vue {
     font-size: 1.3rem;
     font-weight: bold;
   }
-  h4{
+  h4 {
     font-size: 1.2rem;
   }
 }
@@ -176,12 +186,6 @@ export default class ArticleDetail extends Vue {
       }
     }
   }
-}
-ol > ul {
-  margin-left: 50px;
-}
-ul {
-  margin-left: 40px;
 }
 pre {
   display: block;

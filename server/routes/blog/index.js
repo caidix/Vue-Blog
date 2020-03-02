@@ -9,6 +9,8 @@ module.exports = app => {
   router.get('/article/detail', BlogController.findOne)
   router.get('/article/categoryList', BlogController.categoryList)
   router.get('/article/tagList', BlogController.tagList)
+  router.get('/gather/list', BlogController.gatherList)
+  router.post('/gather/getArticle', BlogController.getArticleByGather)
   app.use(async (err, req, res, next) => {
     res.render('error')
     res.status(err.statusCode || 500).send({

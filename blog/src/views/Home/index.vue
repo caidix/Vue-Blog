@@ -6,7 +6,7 @@
       <Author />
     </div>
     <div class="main-left">
-      <div class="main-title">
+      <div class="main-title"  v-setTitle="''">
         <h2>最新文章</h2>
       </div>
       <TopBanner srcBan="home" />
