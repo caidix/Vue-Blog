@@ -157,7 +157,9 @@ export default class ArticleDetail extends Vue {
   box-shadow: 3px 3px 0 0 #f6f6f6;
 }
 .toc-list {
-  margin: 0 10px;
+  padding: 0 10px;
+  max-height: 400px;
+  overflow-y: auto;
   .anchor-ul {
     margin-left: 10px;
     position: relative;

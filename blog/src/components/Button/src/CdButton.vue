@@ -1,6 +1,10 @@
 <template>
   <!-- 注意，这里要给button附上点击事件，否则引入的时候click事件是不会触发的
-    要让他被动触发。去替代button的点击事件
+    要让他被动触发。去替代button的点击事件。如果在组件button内没有声明，直接在
+    父级上声明，为了区别原生事件和自定义事件，需要用到事件修饰符.native,如果不
+    写 .native 修饰符，那上面的 @click 就是自定义事件 click，而非原生事件click
+    ，但我们在组件内只触发了 on-click 事件，而不是 click，所以直接写 @click 会
+    监听不到。
   -->
   <button
     @click="handleClick"

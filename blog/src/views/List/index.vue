@@ -6,7 +6,6 @@
         <cd-modal
           :footer="false"
           :width="900"
-          :destroyOnClose="true"
           :show.sync="showDialog"
           :title="gatherTitle"
         >
