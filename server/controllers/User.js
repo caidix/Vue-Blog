@@ -2,7 +2,13 @@ const UserModel = require('../models/User');
 const { returnClient, undoJwt, setToken, createSha256 } = require('../utils/utils')
 
 const findOne = async (req, res, next) => {
+  if (!req.headers.authorization) {
+    returnClient(res, 401, -1, '登陆验证失败');
+    return;
+  }
   let token = req.headers.authorization;
+  console.log(token)
+  
   const { _id } = undoJwt(token);
   console.log(_id, token)
   let result = await UserModel.findById(_id);
