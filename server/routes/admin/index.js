@@ -25,11 +25,11 @@ module.exports = app => {
 
   app.use('/api/admin',  router);
   // app.use('/api/admin', authMiddleware(), router);
+  router.post('/upload', upload.single('file'), adminArticle.alioss_update);
 
   // 文章路由
   router.post('/article/add', adminArticle.add);
   router.post('/article/edit', adminArticle.editArticle);
-  router.post('/article/upload', upload.single('file'), adminArticle.alioss_update);
   router.get('/article/list', adminArticle.list);
   router.get('/article/findOne', adminArticle.findOne);
   router.get('/article/fuzzySearch', adminArticle.fuzzySearch);

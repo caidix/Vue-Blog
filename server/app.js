@@ -39,6 +39,7 @@ app.use(
 require('./utils/database')(app);
 require('./routes/user')(app);
 require('./routes/admin')(app);
+require('./routes/applet')(app);
 require('./routes/blog')(app);
 
 
