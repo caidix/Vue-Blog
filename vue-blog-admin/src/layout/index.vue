@@ -36,7 +36,6 @@
 import Container from "@/components/Container";
 import Breadcrumb from "@/components/Breadcrumb";
 export default {
-  data() {},
   components: {
     Container,
     Breadcrumb
