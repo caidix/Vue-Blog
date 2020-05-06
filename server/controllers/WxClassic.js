@@ -2,6 +2,10 @@ const WxClassicModel = require('../models/wx/Classic')
 const { splitParams, returnClient } = require('../utils/utils')
 const moment = require('moment');
 
+const uploadWechat = async (req, res, next) => {
+  const file = req.file
+  returnClient(res, 200, 0, '添加成功!', { data: file })
+}
 const createClassic = async (req, res, next) => {
   await WxClassicModel.create({
     ...req.query
@@ -29,5 +33,6 @@ const queryClassic = async (req, res, next) => {
 
 module.exports = {
   createClassic,
-  queryClassic
+  queryClassic,
+  uploadWechat
 }

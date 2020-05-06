@@ -33,6 +33,7 @@ const list = async (req, res, next) => {
   //   returnClient(res, 200, -1, err)
   // })
   const { page, limit } = splitParams(req.url);
+  console.log(page, limit)
   await CategoryModel.countDocuments().then((count) => {
     CategoryModel.find()
       .skip(Number((page - 1) * limit))

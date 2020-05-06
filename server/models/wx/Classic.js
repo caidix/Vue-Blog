@@ -17,6 +17,13 @@ const schema = mongoose.Schema({
     type: Number,
     default: 0
   },
+  isMusic: {
+    type: Boolean,
+    default: false
+  },
+  music: {
+    type: Object
+  },
   isShow: {
     type: Boolean,
     default: true

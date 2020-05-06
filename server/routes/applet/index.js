@@ -4,9 +4,11 @@ module.exports = app => {
     mergeParams: true
   });
   const WxClassicController = require('../../controllers/WxClassic')
+  const { uploadWechat } = require("../../utils/alioss");
   app.use('/api/applet', router);
   router.get('/classic/create', WxClassicController.createClassic)
   router.get('/classic/query', WxClassicController.queryClassic)
+  router.post('/classic/upload',uploadWechat.single('file'), WxClassicController.uploadWechat)
   app.use(async (err, req, res, next) => {
     res.render('error')
     res.status(err.statusCode || 500).send({
