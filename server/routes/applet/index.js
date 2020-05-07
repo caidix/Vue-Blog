@@ -8,6 +8,7 @@ module.exports = app => {
   app.use('/api/applet', router);
   router.get('/classic/create', WxClassicController.createClassic)
   router.get('/classic/query', WxClassicController.queryClassic)
+  router.get('/classic/update', WxClassicController.updateClassic)
   router.post('/classic/upload',uploadWechat.single('file'), WxClassicController.uploadWechat)
   app.use(async (err, req, res, next) => {
     res.render('error')

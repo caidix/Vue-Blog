@@ -3,6 +3,7 @@ const { splitParams, returnClient } = require('../utils/utils')
 const moment = require('moment');
 
 const uploadWechat = async (req, res, next) => {
+  console.log(req.body)
   const file = req.file
   returnClient(res, 200, 0, '添加成功!', { data: file })
 }
@@ -15,7 +16,21 @@ const createClassic = async (req, res, next) => {
     returnClient(res, 200, -1, err)
   })
 }
-
+const updateClassic = async (req, res, next) => {
+  const { id } = req.query;
+  const result = await WxClassicModel.find({ id });
+  if (!result) {
+    returnClient(res, 200, -1, '没有此项!')
+    return;
+  }
+  await WxClassicModel.update({ id }, {
+    ...req.query
+  }).then((data) => {
+    returnClient(res, 200, 0, '修改成功!', data)
+  }).catch((err) => {
+    returnClient(res, 200, -1, err)
+  })
+}
 const queryClassic = async (req, res, next) => {
   const { page, limit } = splitParams(req.url);
   const total = await WxClassicModel.countDocuments()
@@ -34,5 +49,6 @@ const queryClassic = async (req, res, next) => {
 module.exports = {
   createClassic,
   queryClassic,
-  uploadWechat
+  uploadWechat,
+  updateClassic
 }
